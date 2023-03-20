@@ -15,24 +15,29 @@ const to_do = [
   'Comprar entradas para el cine',
 ]
 
-const app = GI.createElement('div', { id: 'app' })
-const list = GI.createElement('ul', { class: 'list' })
+const toDoList = document.getElementById('toDoList');
 
-to_do.forEach((item) => {
-  const li = GI.createElement('li', { class: 'item' })
-  const checkbox = GI.createElement('input', { type: 'checkbox' })
-  const label = GI.createElement('label', { class: 'label' })
+to_do.forEach(item => {
+  const li = document.createElement('li');
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  const label = document.createElement('label');
+  label.textContent = item;
 
-  label.textContent = item
-  li.appendChild(checkbox)
-  li.appendChild(label)
-  list.appendChild(li)
+  checkbox.addEventListener('change', function () {
+    if (this.checked) {
+      label.style.textDecoration = 'line-through';
+      label.style.color = 'gray';
+    } else {
+      label.style.textDecoration = 'none';
+      label.style.color = 'black';
+    }
+  });
 
-})
-
-app.appendChild(list)
-
-document.body.appendChild(app)
+  li.appendChild(checkbox);
+  li.appendChild(label);
+  toDoList.appendChild(li);
+});
 
 
 
